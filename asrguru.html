@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ASRGuru++ Premium</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0e0e1a;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    .header {
+      text-align: center;
+      max-width: 600px;
+      margin-bottom: 30px;
+      padding: 0 15px;
+    }
+
+    .highlight {
+      background-color: #fbbf24;
+      color: black;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      max-width: 1100px;
+      width: 100%;
+      padding: 0 15px;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background-color: #1e1e2e;
+      border-radius: 12px;
+      padding: 25px;
+      flex: 1 1 450px;
+      max-width: 500px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fadeIn 0.7s ease forwards;
+    }
+
+    h1, h2 {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 10px;
+    }
+
+    .feature {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1rem;
+      position: relative;
+      cursor: default;
+    }
+
+    .feature-icon {
+      font-size: 1.3rem;
+      color: #fbbf24;
+      position: relative;
+    }
+
+    /* Tooltip container */
+    .feature-icon:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+      transition-delay: 0.2s;
+    }
+
+    .tooltip {
+      visibility: hidden;
+      opacity: 0;
+      width: max-content;
+      max-width: 200px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 6px 10px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Show above the icon */
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.85rem;
+      pointer-events: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%; /* Arrow below the tooltip */
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #333 transparent transparent transparent;
+    }
+
+    .plan {
+      background-color: #2a2a42;
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 5px transparent;
+    }
+
+    .plan:hover {
+      background-color: #fbbf24;
+      color: black;
+      box-shadow: 0 0 12px #fbbf24;
+    }
+
+    .plan.selected {
+      background-color: #fbbf24;
+      color: black;
+      box-shadow: 0 0 15px #fbbf24;
+      font-weight: 700;
+    }
+
+    .plan-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .plan-duration {
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .qr-image {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin: 20px 0;
+      object-fit: contain;
+    }
+
+    .activation-note {
+      background-color: #78350f;
+      color: #facc15;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      padding-bottom: 15px;
+    }
+
+    .whatsapp-btn {
+      display: block;
+      text-align: center;
+      background: #25D366;
+      padding: 15px;
+      border-radius: 6px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-top: 25px;
+      transition: background 0.3s ease;
+    }
+    .whatsapp-btn:hover {
+      background: #1da851;
+    }
+
+    .note {
+      color: #f87171;
+      background-color: #451a03;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.75);
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    .modal-content {
+      background-color: #1e1e2e;
+      margin: 10% auto;
+      padding: 25px 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 450px;
+      color: white;
+      position: relative;
+      box-shadow: 0 0 15px #fbbf24;
+      animation: slideDown 0.4s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-30px); opacity: 0;}
+      to { transform: translateY(0); opacity: 1;}
+    }
+
+    .close-btn {
+      color: #fbbf24;
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .close-btn:hover {
+      color: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .card {
+        flex: 1 1 100%;
+        max-width: 600px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 15px 10px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+      }
+
+      .feature {
+        font-size: 0.95rem;
+      }
+
+      .whatsapp-btn {
+        font-size: 1rem;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>ASRGuru<span class="highlight">++</span></h1>
+    <p>For those ready to commit (to a career beyond college).</p>
+  </div>
+
+  <div class="container">
+
+    <!-- LEFT COLUMN -->
+    <div class="card">
+      <h2>🚀 Premium Features</h2>
+
+      <div class="feature" title="Get your resume seen by top recruiters faster.">
+        <span class="feature-icon">⚡<span class="tooltip">Boost your resume visibility</span></span> Boosted Resume Visibility
+      </div>
+      <div class="feature" title="Get quick answers from mentors.">
+        <span class="feature-icon">📩<span class="tooltip">Priority mentorship response</span></span> Priority Mentorship Response
+      </div>
+      <div class="feature" title="Show off your premium membership on your profile.">
+        <span class="feature-icon">👑<span class="tooltip">Exclusive premium badge</span></span> Premium Badge + Early Access
+      </div>
+      <div class="feature" title="Join exclusive tech events and circles.">
+        <span class="feature-icon">🎉<span class="tooltip">Invite-only tech circles</span></span> Invite-only Tech Circles & Events
+      </div>
+      <div class="feature" title="Get referrals to top companies.">
+        <span class="feature-icon">💼<span class="tooltip">Exclusive referrals</span></span> Exclusive Referrals to Top Tech Companies
+      </div>
+      <div class="feature" title="One-on-one mentorship with experts.">
+        <span class="feature-icon">🧠<span class="tooltip">1:1 mentorship</span></span> 1:1 Mentorship with Industry Experts
+      </div>
+      <div class="feature" title="Personalized reviews to optimize your profile.">
+        <span class="feature-icon">📊<span class="tooltip">Resume & LinkedIn review</span></span> Personalized Resume & LinkedIn Review
+      </div>
+      <div class="feature" title="Access all mock tests and interview kits.">
+        <span class="feature-icon">🔓<span class="tooltip">Unlock mock tests</span></span> Unlock All Mock Tests & Interview Kits
+      </div>
+      <div class="feature" title="Get fast job and internship alerts.">
+        <span class="feature-icon">⏱️<span class="tooltip">Fast-track alerts</span></span> Fast-track Job & Internship Alerts
+      </div>
+      <div class="feature" title="Certificate of membership available on request.">
+        <span class="feature-icon">🎓<span class="tooltip">Certificate of membership</span></span> Certificate of Membership (on request)
+      </div>
+
+      <h2 style="margin-top: 40px;">📦 Choose Your Plan</h2>
+
+      <div class="plan" data-price="299" data-name="Ignite">
+        <div class="plan-name">🔥 Ignite ₹299</div>
+        <div class="plan-duration">— 2 Months Access</div>
+      </div>
+
+      <div class="plan" data-price="499" data-name="Accelerate">
+        <div class="plan-name">⚡ Accelerate ₹499</div>
+        <div class="plan-duration">— 6 Months Access</div>
+      </div>
+
+      <div class="plan" data-price="899" data-name="Elevate">
+        <div class="plan-name">🚀 Elevate ₹899</div>
+        <div class="plan-duration">— 12 Months Access</div>
+      </div>
+
+      <p style="margin-top:20px; font-size:0.95rem; color:#ccc;">
+        All plans include full access to ASRGuru++ premium features, mentorship, referrals, and more.
+      </p>
+
+      <div class="note">
+        ⚠️ <strong>Note:</strong> Once payment is made, it <strong>cannot be reversed or refunded</strong>. Please choose the correct plan before proceeding.
+      </div>
+    </div> 
+
+    <!-- RIGHT COLUMN -->
+    <div class="card">
+      <h2>💳 Payment</h2>
+      <p>Scan the QR and pay your selected amount.<br/>UPI ID: <strong>razorpay.me/@asrguru</strong></p>
+      <img src="C:\Users\User\Downloads\IMG_20250519_040827.png" alt="QR Code for payment" class="qr-image" />
+
+      <p><strong>After Payment:</strong> Click below to share your transaction ID via WhatsApp.</p>
+
+      <a href="#!" class="whatsapp-btn" id="openModalBtn">
+        📤 Share Payment Details on WhatsApp
+      </a>
+
+      <div class="activation-note">
+        ✅ Once your payment is verified, you’ll be added to our exclusive ASRGuru++ group within 24 hours.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">© 2025 ASRGuru. All rights reserved.</div>
+
+  <!-- Modal -->
+  <div id="paymentModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModalBtn" aria-label="Close">&times;</span>
+      <h2 id="modalTitle">Payment Instructions</h2>
+      <p>Please follow these steps to complete your payment:</p>
+      <ul>
+        <li>Select your desired plan on the left.</li>
+        <li>Scan the QR code to pay the exact amount.</li>
+        <li>Once paid, click the WhatsApp button to share your transaction ID.</li>
+        <li>Wait up to 24 hours for verification and access.</li>
+      </ul>
+      <p>For any queries, contact support@asrguru.in</p>
+    </div>
+  </div>
+
+  <script>
+    // Plan selection toggle
+    const plans = document.querySelectorAll('.plan');
+    let selectedPlan = null;
+
+    plans.forEach(plan => {
+      plan.addEventListener('click', () => {
+        // Remove selection from other plans
+        plans.forEach(p => p.classList.remove('selected'));
+
+        // Select clicked plan
+        plan.classList.add('selected');
+        selectedPlan = {
+          name: plan.dataset.name,
+          price: plan.dataset.price
+        };
+
+        // Update WhatsApp link dynamically with chosen plan info
+        const whatsappBtn = document.getElementById('openModalBtn');
+        const baseLink = "https://wa.me/message/5C7P5YXMKHMEO1?src=qr";
+        whatsappBtn.dataset.plan = `${selectedPlan.name} ₹${selectedPlan.price}`;
+      });
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('paymentModal');
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    openModalBtn.addEventListener('click', () => {
+      if (!selectedPlan) {
+        alert('Please select a plan first.');
+        return;
+      }
+      modal.style.display = 'block';
+      openModalBtn.href = `https://wa.me/message/5C7P5YXMKHMEO1?text=I%20have%20paid%20for%20ASRGuru++%20plan%20${encodeURIComponent(selectedPlan.name)}%20₹${selectedPlan.price}`;
+      openModalBtn.setAttribute('target', '_blank');
+      openModalBtn.setAttribute('rel', 'noopener noreferrer');
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', e => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Accessibility: close modal on Escape key
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.style.display === 'block') {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
